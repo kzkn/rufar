@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "aws-sdk-ssm", "~> 1.148"
+  spec.add_dependency "aws-sdk-ecs", "~> 1.110"
 end

@@ -1,10 +1,15 @@
 require "aws-sdk-ssm"
+require "aws-sdk-ecs"
 
 module Rore
   class Aws
     class << self
       def ssm
         ::Aws::SSM::Client.new(region: region, credentials: credentials)
+      end
+
+      def ecs
+        ::Aws::ECS::Client.new(region: region, credentials: credentials)
       end
 
       def credentials
