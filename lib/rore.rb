@@ -1,8 +1,18 @@
-# frozen_string_literal: true
-
+require_relative "rore/aws"
+require_relative "rore/config"
+require_relative "rore/env_var"
 require_relative "rore/version"
 
 module Rore
   class Error < StandardError; end
-  # Your code goes here...
+
+  class << self
+    def config
+      @config ||= Config.new
+    end
+
+    def configure
+      yield(config)
+    end
+  end
 end
