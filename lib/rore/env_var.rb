@@ -1,13 +1,15 @@
 module Rore
   class EnvVar
+    attr_reader :name, :arn
+
     def initialize(name, arn)
       @name = name
       @arn = arn
     end
 
     class << self
-      def retrieve(service_name, env_name)
-        prefix = "/#{service_name}/#{env_name}"
+      def retrieve(app_name, cluster_name)
+        prefix = "/#{app_name}/#{cluster_name}"
         result = Aws.ssm.get_parameters_by_path({ path: prefix, recursive: true })
         result.parameters.map { |p| from_parameter(p) }
       end

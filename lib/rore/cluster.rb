@@ -12,6 +12,10 @@ module Rore
       "#{app.name}_#{@in_app_name}"
     end
 
+    def retrieve_env_vars
+      EnvVar.retrieve(app.name, @in_app_name)
+    end
+
     def create_cluster
       return if exists?
 
