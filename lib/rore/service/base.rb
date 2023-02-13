@@ -1,7 +1,8 @@
 module Rore
   module Service
     class Base
-      attr_accessor :execution_role_arn, :service_arn, :subnets, :security_groups
+      # TODO: remove execution_role_arn
+      attr_accessor :execution_role_arn, :service_arn
 
       def initialize(cluster)
         @cluster = cluster
@@ -10,6 +11,10 @@ module Rore
 
       def cluster_name
         @cluster.cluster_name
+      end
+
+      def subnet_ids
+        @cluster.subnets.map(&:subnet_id)
       end
 
       def service_name
@@ -51,7 +56,7 @@ module Rore
                                              cluster: cluster_name,
                                              services: [service_name],
                                            })
-        service = result.services.find { |s| s.service_name == service_name && s.status != "INACTIVE" }
+        service = result.services.find { |s| s.service_name == service_name && s.status == "ACTIVE" }
         @service_arn = service&.service_arn
       end
 

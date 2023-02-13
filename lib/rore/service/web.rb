@@ -11,7 +11,6 @@ module Rore
           network_mode: "awsvpc",
           container_definitions: [{
             name: task_definition_name,
-            command: %w[bin/rails server],
             image: image_uri,
             secrets:,
             port_mappings: [
@@ -38,8 +37,8 @@ module Rore
           },
           network_configuration: {
             awsvpc_configuration: {
-              subnets: subnets,
-              security_groups: security_groups,
+              subnets: subnet_ids,
+              security_groups: [],
               assign_public_ip: "ENABLED",
             },
           },

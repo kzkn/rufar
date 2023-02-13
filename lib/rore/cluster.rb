@@ -33,5 +33,31 @@ module Rore
       cluster = result.clusters.find { |c| c.cluster_name == cluster_name }
       @arn = cluster&.cluster_arn
     end
+
+    def subnets
+      @subnets ||= fetch_subnets(vpc_id)
+    end
+
+    def vpc_id
+      @vpc_id ||= fetch_vpc_id
+    end
+
+    def fetch_vpc_id
+      result = Aws.ec2.describe_vpcs({
+                                       filters: [
+                                         { name: "tag:Name", values: ["#{cluster_name}-vpc"] },
+                                       ],
+                                     })
+      result.vpcs[0].vpc_id
+    end
+
+    def fetch_subnets(vpc_id)
+      result = Aws.ec2.describe_subnets({
+                                          filters: [
+                                            { name: "vpc-id", values: [vpc_id] },
+                                          ],
+                                        })
+      result.subnets
+    end
   end
 end
