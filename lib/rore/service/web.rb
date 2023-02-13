@@ -7,6 +7,8 @@ module Rore
           memory:,
           family: task_definition_name,
           execution_role_arn:,
+          requires_compatibilities: ["FARGATE"],
+          network_mode: "awsvpc",
           container_definitions: [{
             name: task_definition_name,
             command: %w[bin/rails server],
@@ -20,6 +22,28 @@ module Rore
             ],
             log_configuration:,
           }],
+        }
+      end
+
+      def create_service_params(task_def_arn)
+        {
+          cluster: cluster_name,
+          service_name:,
+          task_definition: task_def_arn,
+          desired_count: 1,
+          launch_type: "FARGATE",
+          deployment_configuration: {
+            maximum_percent: 200,
+            minimum_healthy_percent: 50,
+          },
+          network_configuration: {
+            awsvpc_configuration: {
+              subnets: subnets,
+              security_groups: security_groups,
+              assign_public_ip: "ENABLED",
+            },
+          },
+        # TODO: load_balancers
         }
       end
     end
