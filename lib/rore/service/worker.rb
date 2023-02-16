@@ -1,12 +1,12 @@
 module Rore
   module Service
-    class Web < Base
+    class Worker < Base
       def name
-        Rore.config.web_service_name || @app.defaults.web_service_name
+        Rore.config.worker_service_name || @app.defaults.worker_service_name
       end
 
       def command
-        Rore.config.web_command || %w[bin/rake app:server]
+        Rore.config.worker_command || %w[bin/rake app:worker]
       end
 
       def register_new_task_definition(image_uri)
@@ -14,20 +14,19 @@ module Rore
           task_definition_family,
           image_uri,
           command,
-          port_mappings: [{ container_port: 80, host_port: 80 }],
         )
       end
 
       def maximum_percent
-        Rore.config.web_deploy_maximum_percent || 200
+        Rore.config.worker_deploy_maximum_percent || 200
       end
 
       def minimum_healthy_percent
-        Rore.config.web_deploy_minimum_healthy_percent || 50
+        Rore.config.worker_deploy_minimum_healthy_percent || 50
       end
 
       def desired_count
-        Rore.config.web_desired_count || 1
+        Rore.config.worker_desired_count || 1
       end
 
       def service_params(task_definition)
@@ -48,7 +47,6 @@ module Rore
               assign_public_ip: "ENABLED",
             },
           },
-        # TODO: load_balancers
         }
       end
     end

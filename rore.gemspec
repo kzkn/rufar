@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "aws-sdk-ssm", "~> 1.148"
   spec.add_dependency "aws-sdk-ecs", "~> 1.110"
   spec.add_dependency "aws-sdk-ec2", "~> 1.365"
+  spec.add_dependency "aws-sdk-iam", "~> 1.75"
 end
