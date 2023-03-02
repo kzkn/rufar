@@ -84,6 +84,7 @@ module Rore
           options: {
             "awslogs-group" => awslogs_group,
             "awslogs-region" => awslogs_region,
+            "awslogs-create-group" => "true",
             "awslogs-stream-prefix" => @family,
           },
         }
