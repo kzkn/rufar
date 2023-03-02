@@ -1,6 +1,6 @@
 module Rore
   class Config
-    attr_accessor :aws_region, :aws_access_key_id, :aws_secret_access_key,
+    attr_accessor :aws_region, :aws_credentials,
                   # vpc
                   :vpc_id, :subnets, :security_groups,
                   # iam role

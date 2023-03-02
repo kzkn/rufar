@@ -28,10 +28,7 @@ module Rore
       end
 
       def credentials
-        ::Aws::Credentials.new(
-          Rore.config.aws_access_key_id,
-          Rore.config.aws_secret_access_key
-        )
+        Rore.config.aws_credentials
       end
 
       def region
