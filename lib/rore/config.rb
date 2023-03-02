@@ -7,6 +7,8 @@ module Rore
                   :task_role_name, :execution_role_name,
                   # parameter store
                   :parameters_prefix,
+                  # load balancer
+                  :target_group_name,
                   # task definition
                   :container_name, :cpu, :memory, :awslogs_group, :awslogs_region,
                   # cluster

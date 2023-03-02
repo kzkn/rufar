@@ -6,7 +6,11 @@ module Rore
       end
 
       def command
-        Rore.config.web_command || %w[bin/rake app:server]
+        if Rore.config.web_command == :image_defined_command
+          nil
+        else
+          Rore.config.web_command || %w[bin/rake app:server]
+        end
       end
 
       def register_new_task_definition(image_uri)
@@ -30,6 +34,10 @@ module Rore
         Rore.config.web_desired_count || 1
       end
 
+      def target_group_arn
+        @app.load_balancer.target_group.arn
+      end
+
       def service_params(task_definition)
         {
           cluster: @cluster.name,
@@ -48,7 +56,13 @@ module Rore
               assign_public_ip: "ENABLED",
             },
           },
-        # TODO: load_balancers
+          load_balancers: [
+            {
+              target_group_arn:,
+              container_name: task_definition.container_name,
+              container_port: 80
+            }
+          ]
         }
       end
     end

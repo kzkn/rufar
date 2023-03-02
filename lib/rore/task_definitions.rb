@@ -24,6 +24,10 @@ module Rore
         @arn = result.task_definition.task_definition_arn
       end
 
+      def container_name
+        Rore.config.container_name || @app.defaults.container_name
+      end
+
       private
 
       def task_definition_params(image_uri, command, port_mappings:)
@@ -44,10 +48,6 @@ module Rore
                                     log_configuration:,
                                   }],
         }
-      end
-
-      def container_name
-        Rore.config.container_name || @app.defaults.container_name
       end
 
       def cpu

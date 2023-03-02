@@ -8,6 +8,10 @@ module Rore
       @app.name
     end
 
+    def hyphenized_name
+      name.tr("_", "-")
+    end
+
     def vpc_name
       "#{name}_vpc"
     end
@@ -54,6 +58,10 @@ module Rore
 
     def worker_service_name
       "worker"
+    end
+
+    def target_group_name
+      "#{hyphenized_name}-target-group"
     end
   end
 end

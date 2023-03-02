@@ -29,5 +29,9 @@ module Rore
     def cluster
       @cluster ||= Cluster.new(self)
     end
+
+    def load_balancer
+      @load_balancer ||= LoadBalancer.new(self)
+    end
   end
 end

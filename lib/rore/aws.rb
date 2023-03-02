@@ -2,6 +2,7 @@ require "aws-sdk-ssm"
 require "aws-sdk-ecs"
 require "aws-sdk-ec2"
 require "aws-sdk-iam"
+require "aws-sdk-elasticloadbalancingv2"
 
 module Rore
   class Aws
@@ -20,6 +21,10 @@ module Rore
 
       def iam
         ::Aws::IAM::Client.new(region: region, credentials: credentials)
+      end
+
+      def elb
+        ::Aws::ElasticLoadBalancingV2::Client.new(region: region, credentials: credentials)
       end
 
       def credentials
