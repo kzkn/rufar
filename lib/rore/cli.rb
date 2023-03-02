@@ -22,8 +22,12 @@ module Rore
       return help unless app_name && image_uri
 
       app = App.new(app_name)
+
+      Rore.logger.info "Start deploy #{app.name}"
       deploy = Deploy.new(app)
       deploy.run(image_uri)
+
+      Rore.logger.info "Finish deploy #{app.name}"
       EXIT_SUCCESS
     end
 

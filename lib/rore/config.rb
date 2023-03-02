@@ -1,6 +1,8 @@
+require "logger"
+
 module Rore
   class Config
-    attr_accessor :aws_region, :aws_credentials,
+    attr_accessor :aws_region, :aws_credentials, :logger,
                   # vpc
                   :vpc_id, :subnets, :security_groups,
                   # iam role
@@ -28,5 +30,9 @@ module Rore
                   # deploy
                   :app_release_task_definition_service_name,
                   :app_release_command
+
+    def initialize
+      @logger = Logger.new(STDOUT)
+    end
   end
 end

@@ -25,5 +25,9 @@ module Rore
     def configure
       yield(config)
     end
+
+    def logger
+      config.logger
+    end
   end
 end
