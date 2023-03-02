@@ -13,3 +13,4 @@
 /Gemfile.lock
 
 .dir-locals.el
+/config/environment.rb
