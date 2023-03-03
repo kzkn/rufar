@@ -6,7 +6,7 @@ module Rore
       end
 
       def command
-        Rore.config.worker_command || %w[bin/rake app:worker]
+        choose_command(Rore.config.worker_command, %w[bin/rake app:worker])
       end
 
       def register_new_task_definition(image_uri)

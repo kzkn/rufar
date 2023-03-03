@@ -6,11 +6,7 @@ module Rore
       end
 
       def command
-        if Rore.config.web_command == :image_defined_command
-          nil
-        else
-          Rore.config.web_command || %w[bin/rake app:server]
-        end
+        choose_command(Rore.config.web_command, %w[bin/rake app:server])
       end
 
       def register_new_task_definition(image_uri)

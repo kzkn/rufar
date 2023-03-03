@@ -63,6 +63,14 @@ module Rore
         service = result.services.find { |s| s.service_name == name && s.status == "ACTIVE" }
         @arn = service&.service_arn
       end
+
+      def choose_command(primary_command, default_command)
+        if primary_command == :image_defined_command
+          nil
+        else
+          primary_command || default_command
+        end
+      end
     end
   end
 end
