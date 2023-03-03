@@ -44,6 +44,9 @@ module Rore
     def deploy(app_name, image_uri)
       return help_for_subcommand unless app_name && image_uri
 
+      if @options[:config]
+        Rore.config.load_file(@options[:config])
+      end
       app = App.new(app_name)
 
       Rore.logger.info "Start deploy #{app.name}"
