@@ -1,25 +1,48 @@
+require "optparse"
+
 module Rore
   class CLI
     EXIT_SUCCESS = 0
     EXIT_FAILURE = 1
 
     def initialize(argv)
-      @argv = argv
+      @subcommand = read_sub_command(argv)
+      @options = {}
+      option_parsers[@subcommand].order!(argv, into: @options)
+      @rest_args = argv
+    end
+
+    def read_sub_command(argv)
+      cmd = argv.shift
+      return cmd if option_parsers.key?(cmd)
+
+      subcommands = option_parsers.keys
+      STDERR.puts "Usage: rore #{subcommands.join(" | ")}"
+      exit EXIT_FAILURE
+    end
+
+    def option_parsers
+      @options_parsers ||= {
+        "deploy" => OptionParser.new do |opts|
+          opts.banner = "Usage: rore deploy [options] APP_NAME IMAGE_URI"
+          opts.on("-C PATH", "--config PATH", "Load PATH as a config file")
+        end,
+      }
     end
 
     def run
-      status_code = case @argv[0]
+      status_code = case @subcommand
         when "deploy"
-          app_name, image_uri = @argv[1], @argv[2]
+          app_name, image_uri = @rest_args
           deploy(app_name, image_uri)
         else
-          help
+          EXIT_FAILURE
         end
       exit status_code
     end
 
     def deploy(app_name, image_uri)
-      return help unless app_name && image_uri
+      return help_for_subcommand unless app_name && image_uri
 
       app = App.new(app_name)
 
@@ -31,8 +54,8 @@ module Rore
       EXIT_SUCCESS
     end
 
-    def help
-      STDERR.puts "Usage: rore deploy APP_NAME IMAGE_URI"
+    def help_for_subcommand
+      STDERR.puts option_parsers[@subcommand].help
       EXIT_FAILURE
     end
 
