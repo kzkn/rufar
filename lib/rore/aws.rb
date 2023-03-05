@@ -32,7 +32,7 @@ module Rore
       end
 
       def region
-        Rore.config.aws_region
+        Rore.config.aws_region || ENV["AWS_REGION"]
       end
     end
   end
