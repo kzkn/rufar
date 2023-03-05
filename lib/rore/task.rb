@@ -15,7 +15,7 @@ module Rore
     end
 
     def exit_code
-      result = Aws.ecs.describe_tasks({ tasks: [@arn] })
+      result = Aws.ecs.describe_tasks({ cluster: @cluster.name, tasks: [@arn] })
       task = result.tasks.find { |t| t.task_arn == @arn }
       container = task.containers.find { |c| c.name == container_name }
       container.exit_code
