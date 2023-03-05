@@ -45,7 +45,7 @@ module Rore
     end
 
     def awslogs_region
-      Rore.config.aws_region
+      Aws.region
     end
 
     def cluster_name
