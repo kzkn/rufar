@@ -13,7 +13,12 @@ module Rore
 
       task_def = choose_app_release_task_definition(task_defs)
       Rore.logger.info "Run app release task; task_def=#{task_def.arn}"
-      run_app_release(task_def)
+
+      exit_code = run_app_release(task_def)
+      if exit_code != 0
+        Rore.logger.error "Failed to run app release task; exit_code=#{exit_code}"
+        raise "Failed to run app release task"
+      end
 
       Rore.logger.info "Deploy services"
       deploy_service(task_defs)

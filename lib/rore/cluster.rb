@@ -35,6 +35,7 @@ module Rore
       task = Task.new(@app, self)
       task.run(task_definition, command)
       task.wait
+      task.exit_code
     end
 
     private

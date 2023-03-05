@@ -14,6 +14,13 @@ module Rore
       Aws.ecs.wait_until(:tasks_stopped, { cluster: @cluster.name, tasks: [@arn] })
     end
 
+    def exit_code
+      result = Aws.ecs.describe_tasks({ tasks: [@arn] })
+      task = result.tasks.find { |t| t.task_arn == @arn }
+      container = task.containers.find { |c| c.name == container_name }
+      container.exit_code
+    end
+
     def task_params(task_definition, command)
       {
         cluster: @cluster.name,
