@@ -28,7 +28,7 @@ module Rore
       end
 
       def credentials
-        Rore.config.aws_credentials
+        Rore.config.aws_credentials || ::Aws::ECSCredentials.new
       end
 
       def region
