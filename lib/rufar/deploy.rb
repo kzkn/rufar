@@ -22,6 +22,9 @@ module Rufar
 
       Rufar.logger.info "Deploy services"
       deploy_service(task_defs)
+
+      Rufar.logger.info "Wait services stable"
+      @app.cluster.wait_services_stable
     end
 
     private

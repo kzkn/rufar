@@ -38,6 +38,10 @@ module Rufar
       task.exit_code
     end
 
+    def wait_services_stable
+      Aws.ecs.wait_until(:services_stable, { cluster: name, services: services.map(&:arn) })
+    end
+
     private
 
     def exists?

@@ -1,6 +1,8 @@
 module Rufar
   module Service
     class Base
+      attr_reader :arn
+
       def initialize(app, cluster)
         @app = app
         @cluster = cluster
