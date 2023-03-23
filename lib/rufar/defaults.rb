@@ -33,11 +33,11 @@ module Rufar
     end
 
     def cpu
-      "256"
+      256
     end
 
     def memory
-      "512"
+      512
     end
 
     def awslogs_group

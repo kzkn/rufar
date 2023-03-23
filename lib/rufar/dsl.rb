@@ -39,20 +39,24 @@ module Rufar
       @cluster_name = name
     end
 
-    def web_service(name: nil, desired_count: nil, command: nil, deploy_maximum_percent: nil, deploy_minimum_healthy_percent: nil)
+    def web_service(name: nil, desired_count: nil, command: nil, deploy_maximum_percent: nil, deploy_minimum_healthy_percent: nil, cpu: nil, memory: nil)
       @web_service_name = name
       @web_desired_count = desired_count
       @web_command = command
       @web_deploy_maximum_percent = deploy_maximum_percent
       @web_deploy_minimum_healthy_percent = deploy_minimum_healthy_percent
+      @web_cpu = cpu
+      @web_memory = memory
     end
 
-    def worker_service(name: nil, desired_count: nil, command: nil, deploy_maximum_percent: nil, deploy_minimum_healthy_percent: nil)
+    def worker_service(name: nil, desired_count: nil, command: nil, deploy_maximum_percent: nil, deploy_minimum_healthy_percent: nil, cpu: nil, memory: nil)
       @worker_service_name = name
       @worker_desired_count = desired_count
       @worker_command = command
       @worker_deploy_maximum_percent = deploy_maximum_percent
       @worker_deploy_minimum_healthy_percent = deploy_minimum_healthy_percent
+      @worker_cpu = cpu
+      @worker_memory = memory
     end
 
     def release(task_definition_service_name: nil, command: nil)

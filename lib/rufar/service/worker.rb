@@ -14,6 +14,8 @@ module Rufar
           task_definition_family,
           image_uri,
           command,
+          cpu: Rufar.config.worker_cpu,
+          memory: Rufar.config.worker_memory,
         )
       end
 

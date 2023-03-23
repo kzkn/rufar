@@ -19,8 +19,6 @@ module Rufar
       :target_group_name,
       # task definition
       :container_name,
-      :cpu,
-      :memory,
       :awslogs_group,
       :awslogs_region,
       # cluster
@@ -31,12 +29,16 @@ module Rufar
       :web_command,
       :web_deploy_maximum_percent,
       :web_deploy_minimum_healthy_percent,
+      :web_cpu,
+      :web_memory,
       # worker service
       :worker_service_name,
       :worker_desired_count,
       :worker_command,
       :worker_deploy_maximum_percent,
       :worker_deploy_minimum_healthy_percent,
+      :worker_cpu,
+      :worker_memory,
       # deploy
       :app_release_task_definition_service_name,
       :app_release_command,

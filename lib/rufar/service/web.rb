@@ -14,6 +14,8 @@ module Rufar
           task_definition_family,
           image_uri,
           command,
+          cpu: Rufar.config.web_cpu,
+          memory: Rufar.config.web_memory,
           port_mappings: [{ container_port: 80, host_port: 80 }],
         )
       end
@@ -56,9 +58,9 @@ module Rufar
             {
               target_group_arn:,
               container_name: task_definition.container_name,
-              container_port: 80
-            }
-          ]
+              container_port: 80,
+            },
+          ],
         }
       end
     end

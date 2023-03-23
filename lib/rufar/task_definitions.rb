@@ -4,9 +4,9 @@ module Rufar
       @app = app
     end
 
-    def register(family, image_uri, command, port_mappings: nil)
+    def register(family, image_uri, command, cpu:, memory:, port_mappings: nil)
       task_def = TaskDefinition.new(@app, family)
-      task_def.register(image_uri, command, port_mappings:)
+      task_def.register(image_uri, command, cpu:, memory:, port_mappings:)
       task_def
     end
 
@@ -18,8 +18,8 @@ module Rufar
         @family = family
       end
 
-      def register(image_uri, command, port_mappings:)
-        params = task_definition_params(image_uri, command, port_mappings:)
+      def register(image_uri, command, cpu:, memory:, port_mappings:)
+        params = task_definition_params(image_uri, command, cpu:, memory:, port_mappings:)
         result = Aws.ecs.register_task_definition(params)
         @arn = result.task_definition.task_definition_arn
       end
@@ -30,10 +30,10 @@ module Rufar
 
       private
 
-      def task_definition_params(image_uri, command, port_mappings:)
+      def task_definition_params(image_uri, command, cpu:, memory:, port_mappings:)
         {
-          cpu:,
-          memory:,
+          cpu: (cpu || @app.defaults.cpu).to_s,
+          memory: (memory || @app.defaults.memory).to_s,
           family: @family,
           execution_role_arn:,
           task_role_arn:,
@@ -48,14 +48,6 @@ module Rufar
                                     log_configuration:,
                                   }],
         }
-      end
-
-      def cpu
-        Rufar.config.cpu || @app.defaults.cpu
-      end
-
-      def memory
-        Rufar.config.memory || @app.defaults.memory
       end
 
       def execution_role_arn
