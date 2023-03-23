@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class LoadBalancer
     Resource = Struct.new(:arn)
 
@@ -13,7 +13,7 @@ module Rore
     private
 
     def fetch_target_group
-      name = Rore.config.target_group_name || @app.defaults.target_group_name
+      name = Rufar.config.target_group_name || @app.defaults.target_group_name
       result = Aws.elb.describe_target_groups({ names: [name] })
       target_group = result.target_groups[0]
       Resource.new(target_group.target_group_arn)

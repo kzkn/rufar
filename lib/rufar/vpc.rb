@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class Vpc
     Resource = Struct.new(:id)
 
@@ -26,9 +26,9 @@ module Rore
     end
 
     def vpc_filter
-      if Rore.config.vpc_id
+      if Rufar.config.vpc_id
         {
-          vpc_ids: [Rore.config.vpc_id],
+          vpc_ids: [Rufar.config.vpc_id],
         }
       else
         {
@@ -46,13 +46,13 @@ module Rore
 
     def subnets_filter
       filters = [{ name: "vpc-id", values: [vpc.vpc_id] }]
-      if Rore.config.subnets
-        { subnet_ids: Rore.config.subnets, filter: }
+      if Rufar.config.subnets
+        { subnet_ids: Rufar.config.subnets, filter: }
       else
         {
           filters: [
             *filters,
-            { name: "tag:Purpose", values: ["rore"] },
+            { name: "tag:Purpose", values: ["rufar"] },
           ],
         }
       end
@@ -65,13 +65,13 @@ module Rore
 
     def security_groups_filter
       filters = [{ name: "vpc-id", values: [vpc.vpc_id] }]
-      if Rore.config.security_groups
-        { group_ids: Rore.config.security_groups, filter: }
+      if Rufar.config.security_groups
+        { group_ids: Rufar.config.security_groups, filter: }
       else
         {
           filters: [
             *filters,
-            { name: "tag:Purpose", values: ["rore"] },
+            { name: "tag:Purpose", values: ["rufar"] },
           ],
         }
       end

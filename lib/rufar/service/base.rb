@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   module Service
     class Base
       def initialize(app, cluster)

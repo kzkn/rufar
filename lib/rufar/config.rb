@@ -1,6 +1,6 @@
 require "logger"
 
-module Rore
+module Rufar
   class Config
     CONFIGURATIONS = [
       # aws core

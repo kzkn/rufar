@@ -1,12 +1,12 @@
-module Rore
+module Rufar
   module Service
     class Worker < Base
       def name
-        Rore.config.worker_service_name || @app.defaults.worker_service_name
+        Rufar.config.worker_service_name || @app.defaults.worker_service_name
       end
 
       def command
-        choose_command(Rore.config.worker_command, %w[bin/rake app:worker])
+        choose_command(Rufar.config.worker_command, %w[bin/rake app:worker])
       end
 
       def register_new_task_definition(image_uri)
@@ -18,15 +18,15 @@ module Rore
       end
 
       def maximum_percent
-        Rore.config.worker_deploy_maximum_percent || 200
+        Rufar.config.worker_deploy_maximum_percent || 200
       end
 
       def minimum_healthy_percent
-        Rore.config.worker_deploy_minimum_healthy_percent || 50
+        Rufar.config.worker_deploy_minimum_healthy_percent || 50
       end
 
       def desired_count
-        Rore.config.worker_desired_count || 1
+        Rufar.config.worker_desired_count || 1
       end
 
       def service_params(task_definition)

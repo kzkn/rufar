@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class Defaults
     def initialize(app)
       @app = app

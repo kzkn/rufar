@@ -1,6 +1,6 @@
 require "optparse"
 
-module Rore
+module Rufar
   class CLI
     EXIT_SUCCESS = 0
     EXIT_FAILURE = 1
@@ -17,14 +17,14 @@ module Rore
       return cmd if option_parsers.key?(cmd)
 
       subcommands = option_parsers.keys
-      STDERR.puts "Usage: rore #{subcommands.join(" | ")}"
+      STDERR.puts "Usage: rufar #{subcommands.join(" | ")}"
       exit EXIT_FAILURE
     end
 
     def option_parsers
       @options_parsers ||= {
         "deploy" => OptionParser.new do |opts|
-          opts.banner = "Usage: rore deploy [options] APP_NAME IMAGE_URI"
+          opts.banner = "Usage: rufar deploy [options] APP_NAME IMAGE_URI"
           opts.on("-C PATH", "--config PATH", "Load PATH as a config file")
         end,
       }
@@ -45,15 +45,15 @@ module Rore
       return help_for_subcommand unless app_name && image_uri
 
       if @options[:config]
-        Rore.config.load_file(@options[:config])
+        Rufar.config.load_file(@options[:config])
       end
       app = App.new(app_name)
 
-      Rore.logger.info "Start deploy #{app.name}"
+      Rufar.logger.info "Start deploy #{app.name}"
       deploy = Deploy.new(app)
       deploy.run(image_uri)
 
-      Rore.logger.info "Finish deploy #{app.name}"
+      Rufar.logger.info "Finish deploy #{app.name}"
       EXIT_SUCCESS
     end
 

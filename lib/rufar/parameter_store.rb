@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class ParameterStore
     Parameter = Struct.new(:name, :arn)
 
@@ -13,7 +13,7 @@ module Rore
     private
 
     def parameters_prefix
-      Rore.config.parameters_prefix || @app.defaults.parameters_prefix
+      Rufar.config.parameters_prefix || @app.defaults.parameters_prefix
     end
 
     def fetch_parameters

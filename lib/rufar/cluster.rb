@@ -1,11 +1,11 @@
-module Rore
+module Rufar
   class Cluster
     def initialize(app)
       @app = app
     end
 
     def name
-      Rore.config.cluster_name || @app.defaults.cluster_name
+      Rufar.config.cluster_name || @app.defaults.cluster_name
     end
 
     def create

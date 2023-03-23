@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class App
     attr_reader :name
 

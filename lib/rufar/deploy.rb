@@ -1,26 +1,26 @@
-module Rore
+module Rufar
   class Deploy
     def initialize(app)
       @app = app
     end
 
     def run(image_uri)
-      Rore.logger.info "Creating cluster"
+      Rufar.logger.info "Creating cluster"
       create_cluster
 
-      Rore.logger.info "Register task definition; image_uri=#{image_uri}"
+      Rufar.logger.info "Register task definition; image_uri=#{image_uri}"
       task_defs = register_task_definitions(image_uri)
 
       task_def = choose_app_release_task_definition(task_defs)
-      Rore.logger.info "Run app release task; task_def=#{task_def.arn}"
+      Rufar.logger.info "Run app release task; task_def=#{task_def.arn}"
 
       exit_code = run_app_release(task_def)
       if exit_code != 0
-        Rore.logger.error "Failed to run app release task; exit_code=#{exit_code}"
+        Rufar.logger.error "Failed to run app release task; exit_code=#{exit_code}"
         raise "Failed to run app release task"
       end
 
-      Rore.logger.info "Deploy services"
+      Rufar.logger.info "Deploy services"
       deploy_service(task_defs)
     end
 
@@ -49,11 +49,11 @@ module Rore
     end
 
     def app_release_task_definition
-      Rore.config.app_release_task_definition_service_name || "web"
+      Rufar.config.app_release_task_definition_service_name || "web"
     end
 
     def app_release_command
-      Rore.config.app_release_command || %w[bin/rake app:release]
+      Rufar.config.app_release_command || %w[bin/rake app:release]
     end
   end
 end

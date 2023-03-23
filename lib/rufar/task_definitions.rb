@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class TaskDefinitions
     def initialize(app)
       @app = app
@@ -25,7 +25,7 @@ module Rore
       end
 
       def container_name
-        Rore.config.container_name || @app.defaults.container_name
+        Rufar.config.container_name || @app.defaults.container_name
       end
 
       private
@@ -51,11 +51,11 @@ module Rore
       end
 
       def cpu
-        Rore.config.cpu || @app.defaults.cpu
+        Rufar.config.cpu || @app.defaults.cpu
       end
 
       def memory
-        Rore.config.memory || @app.defaults.memory
+        Rufar.config.memory || @app.defaults.memory
       end
 
       def execution_role_arn
@@ -71,11 +71,11 @@ module Rore
       end
 
       def awslogs_group
-        Rore.config.awslogs_group || @app.defaults.awslogs_group
+        Rufar.config.awslogs_group || @app.defaults.awslogs_group
       end
 
       def awslogs_region
-        Rore.config.awslogs_region || @app.defaults.awslogs_region
+        Rufar.config.awslogs_region || @app.defaults.awslogs_region
       end
 
       def log_configuration

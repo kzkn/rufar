@@ -1,12 +1,12 @@
-module Rore
+module Rufar
   module Service
     class Web < Base
       def name
-        Rore.config.web_service_name || @app.defaults.web_service_name
+        Rufar.config.web_service_name || @app.defaults.web_service_name
       end
 
       def command
-        choose_command(Rore.config.web_command, %w[bin/rake app:server])
+        choose_command(Rufar.config.web_command, %w[bin/rake app:server])
       end
 
       def register_new_task_definition(image_uri)
@@ -19,15 +19,15 @@ module Rore
       end
 
       def maximum_percent
-        Rore.config.web_deploy_maximum_percent || 200
+        Rufar.config.web_deploy_maximum_percent || 200
       end
 
       def minimum_healthy_percent
-        Rore.config.web_deploy_minimum_healthy_percent || 50
+        Rufar.config.web_deploy_minimum_healthy_percent || 50
       end
 
       def desired_count
-        Rore.config.web_desired_count || 1
+        Rufar.config.web_desired_count || 1
       end
 
       def target_group_arn

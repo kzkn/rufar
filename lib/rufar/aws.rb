@@ -4,7 +4,7 @@ require "aws-sdk-ec2"
 require "aws-sdk-iam"
 require "aws-sdk-elasticloadbalancingv2"
 
-module Rore
+module Rufar
   class Aws
     class << self
       def ssm
@@ -28,11 +28,11 @@ module Rore
       end
 
       def credentials
-        Rore.config.aws_credentials || ::Aws::ECSCredentials.new
+        Rufar.config.aws_credentials || ::Aws::ECSCredentials.new
       end
 
       def region
-        Rore.config.aws_region || ENV["AWS_REGION"]
+        Rufar.config.aws_region || ENV["AWS_REGION"]
       end
     end
   end

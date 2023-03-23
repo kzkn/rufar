@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class Task
     def initialize(app, cluster)
       @app = app
@@ -45,7 +45,7 @@ module Rore
     end
 
     def container_name
-      Rore.config.container_name || @app.defaults.container_name
+      Rufar.config.container_name || @app.defaults.container_name
     end
 
     def subnets

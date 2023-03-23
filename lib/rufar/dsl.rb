@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class DSL
     def apply_to(config)
       Config::CONFIGURATIONS.each do |key|

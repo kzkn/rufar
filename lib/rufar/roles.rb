@@ -1,4 +1,4 @@
-module Rore
+module Rufar
   class Roles
     Role = Struct.new(:arn)
 
@@ -7,12 +7,12 @@ module Rore
     end
 
     def task_role
-      role_name = Rore.config.task_role_name || @app.defaults.task_role_name
+      role_name = Rufar.config.task_role_name || @app.defaults.task_role_name
       @task_role ||= fetch_role(role_name)
     end
 
     def execution_role
-      role_name = Rore.config.execution_role_name || @app.defaults.execution_role_name
+      role_name = Rufar.config.execution_role_name || @app.defaults.execution_role_name
       @execution_role ||= fetch_role(role_name)
     end
 
