@@ -39,6 +39,8 @@ module Rufar
       :web_cpu_step_scaling_threshold,
       :web_cpu_step_scaling_cooldown,
       :web_cpu_step_scaling_steps,
+      :web_capacity_provider_strategy_mode,
+      :web_custom_capacity_provider_strategies,
       # worker service
       :worker_service_name,
       :worker_desired_count,
@@ -55,6 +57,8 @@ module Rufar
       :worker_cpu_step_scaling_threshold,
       :worker_cpu_step_scaling_cooldown,
       :worker_cpu_step_scaling_steps,
+      :worker_capacity_provider_strategy_mode,
+      :worker_custom_capacity_provider_strategies,
       # deploy
       :app_release_task_definition_service_name,
       :app_release_command,

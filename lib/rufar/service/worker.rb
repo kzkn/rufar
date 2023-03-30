@@ -63,13 +63,21 @@ module Rufar
         Rufar.config.worker_cpu_step_scaling_steps || default_cpu_step_scaling_steps
       end
 
+      def capacity_provider_strategy_mode
+        Rufar.config.worker_capacity_provider_strategy_mode || :hybrid
+      end
+
+      def custom_capacity_provider_strategies
+        Rufar.config.worker_custom_capacity_provider_strategies
+      end
+
       def service_params(task_definition)
         {
           cluster: @cluster.name,
           service_name: name,
           task_definition: task_definition.arn,
           desired_count:,
-          launch_type: "FARGATE",
+          capacity_provider_strategy: capacity_provider_strategies,
           deployment_configuration: {
             maximum_percent:,
             minimum_healthy_percent:,

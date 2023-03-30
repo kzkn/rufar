@@ -64,6 +64,14 @@ module Rufar
         Rufar.config.web_cpu_step_scaling_steps || default_cpu_step_scaling_steps
       end
 
+      def capacity_provider_strategy_mode
+        Rufar.config.web_capacity_provider_strategy_mode || :hybrid
+      end
+
+      def custom_capacity_provider_strategies
+        Rufar.config.web_custom_capacity_provider_strategies
+      end
+
       def target_group_arn
         @app.load_balancer.target_group.arn
       end
@@ -74,7 +82,7 @@ module Rufar
           service_name: name,
           task_definition: task_definition.arn,
           desired_count:,
-          launch_type: "FARGATE",
+          capacity_provider_strategy: capacity_provider_strategies,
           deployment_configuration: {
             maximum_percent:,
             minimum_healthy_percent:,
