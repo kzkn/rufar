@@ -31,7 +31,8 @@ module Rufar
       def create_service(task_definition)
         return if exists?
 
-        result = Aws.ecs.create_service(service_params(task_definition))
+        params = service_params(task_definition).merge(service_name: name)
+        result = Aws.ecs.create_service(params)
         @arn = result.service.service_arn
       end
 
@@ -52,11 +53,11 @@ module Rufar
       end
 
       def update_service(task_definition)
-        Aws.ecs.update_service({
-          cluster: @cluster.name,
+        params = service_params(task_definition).merge(
           service: @arn,
-          task_definition: task_definition.arn,
-        })
+          force_new_deployment: true,
+        )
+        Aws.ecs.update_service(params)
       end
 
       def exists?
