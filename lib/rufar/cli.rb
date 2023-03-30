@@ -44,8 +44,9 @@ module Rufar
     def deploy(app_name, image_uri)
       return help_for_subcommand unless app_name && image_uri
 
+      Rufar.config.app_name = app_name
       if @options[:config]
-        Rufar.config.load_file(@options[:config])
+        load(@options[:config])
       end
       app = App.new(app_name)
 

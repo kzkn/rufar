@@ -64,17 +64,10 @@ module Rufar
       :app_release_command,
     ]
 
-    attr_accessor :logger, *CONFIGURATIONS
+    attr_accessor :logger, :app_name, *CONFIGURATIONS
 
     def initialize
       @logger = Logger.new(STDOUT)
-    end
-
-    def load_file(file)
-      config = File.read(file)
-      dsl = DSL.new
-      dsl.instance_eval(config, file)
-      dsl.apply_to(self)
     end
   end
 end
