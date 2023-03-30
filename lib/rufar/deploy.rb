@@ -47,6 +47,7 @@ module Rufar
 
     def deploy_service(task_definitions)
       task_definitions.each do |service, task_definition|
+        service.update_auto_scaling_policies
         service.deploy(task_definition)
       end
     end

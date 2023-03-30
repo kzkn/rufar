@@ -34,4 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "aws-sdk-ec2", "~> 1.365"
   spec.add_dependency "aws-sdk-iam", "~> 1.75"
   spec.add_dependency "aws-sdk-elasticloadbalancingv2", "~> 1.84"
+  spec.add_dependency "aws-sdk-applicationautoscaling", "~> 1.68"
+  spec.add_dependency "aws-sdk-cloudwatch", "~> 1.72"
 end
