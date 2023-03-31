@@ -79,6 +79,7 @@ module Rufar
       def service_params(task_definition)
         {
           cluster: @cluster.name,
+          service_name: name,
           task_definition: task_definition.arn,
           desired_count:,
           capacity_provider_strategy: capacity_provider_strategies,
