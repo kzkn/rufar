@@ -53,7 +53,7 @@ module Rufar
     end
 
     def release_task_definition
-      Rufar.config.release_task_definition_service_name || "web"
+      Rufar.config.oneoff_task_definition_service_name || "worker"
     end
 
     def release_command

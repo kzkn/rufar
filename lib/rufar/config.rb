@@ -66,7 +66,7 @@ module Rufar
       :worker_cpu_step_scaling_cooldown,
       :worker_cpu_step_scaling_steps,
       # release
-      :release_task_definition_service_name,
+      :oneoff_task_definition_service_name,
       :release_command,
     ]
 
