@@ -31,38 +31,6 @@ module Rufar
         Rufar.config.worker_desired_count || 1
       end
 
-      def max_capacity
-        Rufar.config.worker_max_capacity || 20
-      end
-
-      def min_capacity
-        Rufar.config.worker_min_capacity || 1
-      end
-
-      def cpu_tracking_target_value
-        Rufar.config.worker_cpu_tracking_target_value || 60
-      end
-
-      def cpu_tracking_scale_in_cooldown
-        Rufar.config.worker_cpu_tracking_scale_in_cooldown || 60
-      end
-
-      def cpu_tracking_scale_out_cooldown
-        Rufar.config.worker_cpu_tracking_scale_out_cooldown || 30
-      end
-
-      def cpu_step_scaling_threshold
-        Rufar.config.worker_cpu_step_scaling_threshold || 70
-      end
-
-      def cpu_step_scaling_cooldown
-        Rufar.config.worker_cpu_step_scaling_cooldown || 30
-      end
-
-      def cpu_step_scaling_steps
-        Rufar.config.worker_cpu_step_scaling_steps || default_cpu_step_scaling_steps
-      end
-
       def service_params(task_definition)
         {
           cluster: @cluster.name,

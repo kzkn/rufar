@@ -3,8 +3,6 @@ require "aws-sdk-ecs"
 require "aws-sdk-ec2"
 require "aws-sdk-iam"
 require "aws-sdk-elasticloadbalancingv2"
-require "aws-sdk-applicationautoscaling"
-require "aws-sdk-cloudwatch"
 require "aws-sdk-scheduler"
 
 module Rufar
@@ -28,14 +26,6 @@ module Rufar
 
       def elb
         ::Aws::ElasticLoadBalancingV2::Client.new(**client_args)
-      end
-
-      def app_autoscaling
-        ::Aws::ApplicationAutoScaling::Client.new(**client_args)
-      end
-
-      def cloudwatch
-        ::Aws::CloudWatch::Client.new(**client_args)
       end
 
       def scheduler

@@ -33,15 +33,6 @@ module Rufar
       :web_command,
       :web_cpu,
       :web_memory,
-      # web service auto scaling
-      :web_max_capacity,
-      :web_min_capacity,
-      :web_cpu_tracking_target_value,
-      :web_cpu_tracking_scale_in_cooldown,
-      :web_cpu_tracking_scale_out_cooldown,
-      :web_cpu_step_scaling_threshold,
-      :web_cpu_step_scaling_cooldown,
-      :web_cpu_step_scaling_steps,
       # worker service
       :worker_service_name,
       :worker_desired_count,
@@ -51,15 +42,6 @@ module Rufar
       :worker_command,
       :worker_cpu,
       :worker_memory,
-      # worker service auto scaling
-      :worker_max_capacity,
-      :worker_min_capacity,
-      :worker_cpu_tracking_target_value,
-      :worker_cpu_tracking_scale_in_cooldown,
-      :worker_cpu_tracking_scale_out_cooldown,
-      :worker_cpu_step_scaling_threshold,
-      :worker_cpu_step_scaling_cooldown,
-      :worker_cpu_step_scaling_steps,
       # release
       :oneoff_task_definition_service_name,
       :release_command,

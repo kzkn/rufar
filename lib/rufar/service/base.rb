@@ -1,7 +1,7 @@
 module Rufar
   module Service
     class Base
-      attr_reader :app, :cluster, :arn
+      attr_reader :arn
 
       def initialize(app, cluster)
         @app = app
@@ -14,10 +14,6 @@ module Rufar
 
       def register_new_task_definition(image_uri)
         raise NotImplementedError
-      end
-
-      def update_auto_scaling_policies
-        AutoScaling.new(self).update_policies
       end
 
       def deploy(task_definition)
@@ -76,25 +72,6 @@ module Rufar
         else
           primary_command || default_command
         end
-      end
-
-      def default_cpu_step_scaling_steps
-        [
-          {
-            metric_interval_lower_bound: 0,
-            metric_interval_upper_bound: 10,
-            scaling_adjustment: 3,
-          },
-          {
-            metric_interval_lower_bound: 10,
-            metric_interval_upper_bound: 20,
-            scaling_adjustment: 5,
-          },
-          {
-            metric_interval_lower_bound: 20,
-            scaling_adjustment: 10,
-          },
-        ]
       end
     end
   end
