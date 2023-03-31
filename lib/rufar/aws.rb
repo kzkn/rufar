@@ -5,6 +5,7 @@ require "aws-sdk-iam"
 require "aws-sdk-elasticloadbalancingv2"
 require "aws-sdk-applicationautoscaling"
 require "aws-sdk-cloudwatch"
+require "aws-sdk-scheduler"
 
 module Rufar
   class Aws
@@ -35,6 +36,10 @@ module Rufar
 
       def cloudwatch
         ::Aws::CloudWatch::Client.new(**client_args)
+      end
+
+      def scheduler
+        ::Aws::Scheduler::Client.new(**client_args)
       end
 
       def client_args

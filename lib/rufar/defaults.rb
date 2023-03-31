@@ -28,6 +28,10 @@ module Rufar
       "#{name}_execution_role"
     end
 
+    def scheduler_role_name
+      "#{name}_scheduler_role"
+    end
+
     def container_name
       "app"
     end
@@ -62,6 +66,10 @@ module Rufar
 
     def target_group_name
       "#{hyphenized_name}-target-group"
+    end
+
+    def scheduler_timezone
+      "Asia/Tokyo"
     end
   end
 end

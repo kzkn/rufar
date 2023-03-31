@@ -1,5 +1,7 @@
 module Rufar
   class Cluster
+    attr_reader :arn
+
     def initialize(app)
       @app = app
     end

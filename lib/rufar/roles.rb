@@ -16,6 +16,11 @@ module Rufar
       @execution_role ||= fetch_role(role_name)
     end
 
+    def scheduler_role
+      role_name = Rufar.config.scheduler_role_name || @app.defaults.scheduler_role_name
+      @scheduler_role ||= fetch_role(role_name)
+    end
+
     private
 
     def fetch_role(role_name)

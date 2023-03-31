@@ -33,5 +33,9 @@ module Rufar
     def load_balancer
       @load_balancer ||= LoadBalancer.new(self)
     end
+
+    def scheduler
+      @scheduler ||= Scheduler.new(self)
+    end
   end
 end

@@ -11,7 +11,7 @@ module Rufar
     end
 
     class TaskDefinition
-      attr_reader :arn
+      attr_reader :arn, :revision
 
       def initialize(app, family)
         @app = app
@@ -22,6 +22,7 @@ module Rufar
         params = task_definition_params(image_uri, command, cpu:, memory:, port_mappings:)
         result = Aws.ecs.register_task_definition(params)
         @arn = result.task_definition.task_definition_arn
+        @revision = result.task_definition.revision
       end
 
       def container_name

@@ -11,7 +11,7 @@ module Rufar
       Rufar.logger.info "Register task definition; image_uri=#{image_uri}"
       task_defs = register_task_definitions(image_uri)
 
-      task_def = choose_release_task_definition(task_defs)
+      task_def = choose_task_definition(task_defs, release_task_definition)
       Rufar.logger.info "Run app release task; task_def=#{task_def.arn}"
 
       exit_code = run_release_task(task_def)
@@ -19,6 +19,10 @@ module Rufar
         Rufar.logger.error "Failed to run app release task; exit_code=#{exit_code}"
         raise "Failed to run app release task"
       end
+
+      Rufar.logger.info "Deploy schedules"
+      task_def = choose_task_definition(task_defs, @app.scheduler.scheduler_task_definition)
+      @app.scheduler.deploy(task_def)
 
       Rufar.logger.info "Deploy services"
       deploy_service(task_defs)
@@ -41,8 +45,8 @@ module Rufar
       @app.cluster.run_task(task_definition, release_command)
     end
 
-    def choose_release_task_definition(task_definitions)
-      task_definitions.transform_keys(&:name)[release_task_definition]
+    def choose_task_definition(task_definitions, name)
+      task_definitions.transform_keys(&:name)[name.to_s]
     end
 
     def deploy_service(task_definitions)
