@@ -29,10 +29,6 @@ module Rufar
       services.zip(task_definitions).to_h
     end
 
-    def deploy_services(task_definition)
-      services.map { _1.deploy(image_uri) }
-    end
-
     def run_task(task_definition, command)
       task = Task.new(@app, self)
       task.run(task_definition, command)
