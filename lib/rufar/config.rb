@@ -33,9 +33,6 @@ module Rufar
       :web_command,
       :web_cpu,
       :web_memory,
-      # web service capacity provider strategy
-      :web_capacity_provider_strategy_mode,
-      :web_custom_capacity_provider_strategies,
       # web service auto scaling
       :web_max_capacity,
       :web_min_capacity,
@@ -54,9 +51,6 @@ module Rufar
       :worker_command,
       :worker_cpu,
       :worker_memory,
-      # worker service capacity provider strategy
-      :worker_capacity_provider_strategy_mode,
-      :worker_custom_capacity_provider_strategies,
       # worker service auto scaling
       :worker_max_capacity,
       :worker_min_capacity,

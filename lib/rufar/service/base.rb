@@ -78,10 +78,6 @@ module Rufar
         end
       end
 
-      def capacity_provider_strategies
-        CapacityProvierStrategy.new(self).strategies
-      end
-
       def default_cpu_step_scaling_steps
         [
           {
